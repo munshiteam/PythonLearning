@@ -22,29 +22,6 @@ class IDataInterface:
     @abstractmethod
     def saveSchoolClass(self, schoolClass): raise NotImplementedError
 
-
-class FileDataProvider(IDataInterface):
-    def loadTeachers(self):
-        try:
-            if os.path.exists("teacher_dict.pickle"):
-                with open("teacher_dict.pickle", "rb") as f:
-                    teachers = pickle.load(f)
-                    print(teachers, " \n")
-                    return teachers
-        except EOFError:
-            print("Sorry you have no Teachers saved")
-    def loadStudents(self):
-        try:
-            if os.path.exists("student_dict.pickle"):
-                with open("student_dict.pickle", "rb") as f:
-                    students = pickle.load(f)
-                    print(students, " \n")
-                    return students
-        except EOFError:
-            print("Sorry you have no Student saved")
-
-
-
 class DBDataProvider(IDataInterface):
     def __init__(self):
         self.cnxn = pyodbc.connect("DSN=SchoolSystem")

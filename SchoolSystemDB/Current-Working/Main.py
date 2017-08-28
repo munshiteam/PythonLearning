@@ -1,21 +1,22 @@
 import pickle
+from abc import ABCMeta, abstractmethod
 from Teacher import *
 from Student import *
 from SchoolClass import *
+from DataInterface import IDataInterface
+from DataInterface import DBDataProvider
 import os
+
 teachers = []
 students = []
 schoolClasses = []
 
 def initialize():
     os.system('cls')
-    print("Previously saved teachers, students, \b classes")
+    print("Previously saved teachers, students, and \bclasses\b: ")
     try:
-        if os.path.exists("teacher_dict.pickle"):
-            with open("teacher_dict.pickle", "rb") as f:
-                global teachers
-                teachers = pickle.load(f)
-                print(teachers, " \n")
+        loadTeachers()
+
     except EOFError:
         print("Sorry you have no Teachers saved")
 
